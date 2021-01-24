@@ -1,5 +1,6 @@
 package cjl.com.sunnyweather.ui.place
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import cjl.com.sunnyweather.R
 import cjl.com.sunnyweather.logic.model.Place
+import cjl.com.sunnyweather.ui.weather.WeatherActivity
 
 /**
  *@author: cjl
@@ -29,7 +31,14 @@ class PlaceAdapter(private val fragment:Fragment,private val placeList:List<Plac
         val place = placeList[position]
         holder.placeName.text=place.name
         holder.placeAddress.text=place.address
-
+        holder.itemView.setOnClickListener {
+            val intent = Intent(holder.itemView.context, WeatherActivity::class.java).apply {
+                putExtra("location_lng", place.location.lng)
+                putExtra("location_lat", place.location.lat)
+                putExtra("place_name", place.name)
+            }
+            fragment.startActivity(intent)
+        }
     }
 
     inner class ViewHolder(view:View) : RecyclerView.ViewHolder(view) {
