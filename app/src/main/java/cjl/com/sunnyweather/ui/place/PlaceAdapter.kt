@@ -16,7 +16,7 @@ import cjl.com.sunnyweather.ui.weather.WeatherActivity
  *@date: 2021/1/21 0021 23
  *@desc:
  */
-class PlaceAdapter(private val fragment:Fragment,private val placeList:List<Place>) :RecyclerView.Adapter<PlaceAdapter.ViewHolder>(){
+class PlaceAdapter(private val fragment:PlaceFragment,private val placeList:List<Place>) :RecyclerView.Adapter<PlaceAdapter.ViewHolder>(){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.place_item, parent, false)
@@ -37,7 +37,9 @@ class PlaceAdapter(private val fragment:Fragment,private val placeList:List<Plac
                 putExtra("location_lat", place.location.lat)
                 putExtra("place_name", place.name)
             }
+            fragment.viewModel.savePlace(place)
             fragment.startActivity(intent)
+            fragment.activity?.finish()
         }
     }
 

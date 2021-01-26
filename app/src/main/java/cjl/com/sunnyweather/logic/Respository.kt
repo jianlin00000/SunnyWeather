@@ -1,6 +1,8 @@
 package cjl.com.sunnyweather.logic
 
 import androidx.lifecycle.liveData
+import cjl.com.sunnyweather.logic.dao.PlaceDao
+import cjl.com.sunnyweather.logic.model.Place
 import cjl.com.sunnyweather.logic.model.Weather
 import cjl.com.sunnyweather.logic.network.SunnyWeatherNetwork
 import kotlinx.coroutines.Dispatchers
@@ -54,4 +56,11 @@ object Respository {
         }
         emit(result)
     }
+
+
+    fun savePlace(place:Place)=PlaceDao.savePlace(place)
+
+    fun getSavePlace()=PlaceDao.getPlace()
+
+    fun isPlaceSave()=PlaceDao.isPlaceSave()
 }
